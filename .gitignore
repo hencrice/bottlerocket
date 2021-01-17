@@ -4,6 +4,7 @@
 **/vendor/
 /.cargo
 /.gomodcache
+/.devcontainer
 /html
 /Infra.toml
 /*.pem
