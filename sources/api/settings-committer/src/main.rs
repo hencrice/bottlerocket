@@ -13,7 +13,7 @@ The `--transaction` argument can be used to specify another transaction.
 #[macro_use]
 extern crate log;
 
-use simplelog::{Config as LogConfig, LevelFilter, TermLogger, TerminalMode};
+use simplelog::{Config as LogConfig, LevelFilter, SimpleLogger};
 use snafu::ResultExt;
 use std::str::FromStr;
 use std::{collections::HashMap, env, process};
@@ -203,7 +203,7 @@ async fn run() -> Result<()> {
     let args = parse_args(env::args());
 
     // TerminalMode::Mixed will send errors to stderr and anything less to stdout.
-    TermLogger::init(args.log_level, LogConfig::default(), TerminalMode::Mixed)
+    SimpleLogger::init(args.log_level, LogConfig::default())
         .context(error::Logger)?;
 
     info!("Checking pending settings.");

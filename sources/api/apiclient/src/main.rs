@@ -4,7 +4,7 @@
 
 use apiclient::update;
 use log::{info, log_enabled, trace, warn};
-use simplelog::{ConfigBuilder as LogConfigBuilder, LevelFilter, TermLogger, TerminalMode};
+use simplelog::{ConfigBuilder as LogConfigBuilder, LevelFilter, SimpleLogger};
 use snafu::ResultExt;
 use std::env;
 use std::process;
@@ -323,12 +323,11 @@ async fn run() -> Result<()> {
     trace!("Parsed args for subcommand {:?}: {:?}", subcommand, args);
 
     // We use TerminalMode::Stderr because apiclient users expect server response data on stdout.
-    TermLogger::init(
+    SimpleLogger::init(
         args.log_level,
         LogConfigBuilder::new()
             .add_filter_allow_str("apiclient")
             .build(),
-        TerminalMode::Stderr,
     )
     .context(error::Logger)?;
 

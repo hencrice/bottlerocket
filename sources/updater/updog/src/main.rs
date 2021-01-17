@@ -13,7 +13,7 @@ use semver::Version;
 use serde::{Deserialize, Serialize};
 use signal_hook::{iterator::Signals, SIGTERM};
 use signpost::State;
-use simplelog::{Config as LogConfig, LevelFilter, TermLogger, TerminalMode};
+use simplelog::{Config as LogConfig, LevelFilter, SimpleLogger};
 use snafu::{ErrorCompat, OptionExt, ResultExt};
 use std::convert::{TryFrom, TryInto};
 use std::fs::{self, File, OpenOptions};
@@ -471,10 +471,9 @@ fn main_inner() -> Result<()> {
     let arguments = parse_args(std::env::args());
 
     // TerminalMode::Mixed will send errors to stderr and anything less to stdout.
-    TermLogger::init(
+    SimpleLogger::init(
         arguments.log_level,
         LogConfig::default(),
-        TerminalMode::Mixed,
     )
     .context(error::Logger)?;
 

@@ -1,7 +1,7 @@
 #[macro_use]
 extern crate log;
 
-use simplelog::{Config as LogConfig, LevelFilter, TermLogger, TerminalMode};
+use simplelog::{Config as LogConfig, LevelFilter, SimpleLogger};
 use snafu::ResultExt;
 use std::collections::HashSet;
 use std::env;
@@ -163,7 +163,7 @@ async fn run() -> Result<(), Box<dyn std::error::Error>> {
     let args = parse_args(env::args());
 
     // TerminalMode::Mixed will send errors to stderr and anything less to stdout.
-    TermLogger::init(args.log_level, LogConfig::default(), TerminalMode::Mixed)
+    SimpleLogger::init(args.log_level, LogConfig::default())
         .context(error::Logger)?;
 
     info!("thar-be-settings started");

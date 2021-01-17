@@ -19,7 +19,7 @@ use http::StatusCode;
 use reqwest::blocking::Client;
 use serde::Serialize;
 use serde_json::json;
-use simplelog::{Config as LogConfig, LevelFilter, TermLogger, TerminalMode};
+use simplelog::{Config as LogConfig, LevelFilter, SimpleLogger};
 use snafu::{ensure, OptionExt, ResultExt};
 use std::path::Path;
 use std::str::FromStr;
@@ -404,7 +404,7 @@ async fn run() -> Result<()> {
     let args = parse_args(env::args());
 
     // TerminalMode::Mixed will send errors to stderr and anything less to stdout.
-    TermLogger::init(args.log_level, LogConfig::default(), TerminalMode::Mixed)
+    SimpleLogger::init(args.log_level, LogConfig::default())
         .context(error::Logger)?;
 
     info!("early-boot-config started");
