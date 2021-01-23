@@ -470,7 +470,6 @@ fn main_inner() -> Result<()> {
     // Parse and store the arguments passed to the program
     let arguments = parse_args(std::env::args());
 
-    // TerminalMode::Mixed will send errors to stderr and anything less to stdout.
     SimpleLogger::init(
         arguments.log_level,
         LogConfig::default(),

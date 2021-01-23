@@ -403,7 +403,6 @@ async fn run() -> Result<()> {
     // Parse and store the args passed to the program
     let args = parse_args(env::args());
 
-    // TerminalMode::Mixed will send errors to stderr and anything less to stdout.
     SimpleLogger::init(args.log_level, LogConfig::default())
         .context(error::Logger)?;
 

@@ -251,7 +251,6 @@ enum Command {
 }
 
 fn main_inner() -> Result<()> {
-    // TerminalMode::Mixed will send errors to stderr and anything less to stdout.
     SimpleLogger::init(LevelFilter::Info, LogConfig::default())
         .context(error::Logger)?;
 

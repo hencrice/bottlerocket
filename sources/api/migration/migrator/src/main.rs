@@ -53,7 +53,6 @@ mod test;
 // https://github.com/shepmaster/snafu/issues/110
 fn main() {
     let args = Args::from_env(env::args());
-    // TerminalMode::Mixed will send errors to stderr and anything less to stdout.
     if let Err(e) = SimpleLogger::init(args.log_level, LogConfig::default()) {
         eprintln!("{}", e);
         process::exit(1);

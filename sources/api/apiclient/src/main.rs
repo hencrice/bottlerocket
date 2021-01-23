@@ -322,7 +322,6 @@ async fn run() -> Result<()> {
     let (args, subcommand) = parse_args(env::args());
     trace!("Parsed args for subcommand {:?}: {:?}", subcommand, args);
 
-    // We use TerminalMode::Stderr because apiclient users expect server response data on stdout.
     SimpleLogger::init(
         args.log_level,
         LogConfigBuilder::new()
